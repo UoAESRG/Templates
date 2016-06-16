@@ -1,0 +1,74 @@
+% Template for Research Proposals
+% Based on sample-research-proposal-2.pdf distributed by the UoA FoE/ECE Dept.
+
+\documentclass[12pt]{article}
+
+% Install and configure packages
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{makeidx}
+\usepackage[iso]{datetime}
+\usepackage[caption=false,font=footnotesize]{subfig}
+\usepackage{url}
+
+% Trigger indexing for figures
+\makeindex
+
+\begin{document}
+
+% Research report title page
+\begin{titlepage}
+    \centering
+    {\scshape\LARGE PhD Research Proposal \par}
+    % Enrollment date - Expected Completion Data
+    {\scshape\Large 2016-01-01 - 2019-01-01 \par} 
+    \vfill
+    % Descriptive Project Title
+    {\huge\bfseries Research Project Title\par} 
+    \vfill
+    % Author Name
+    {\Large John Smith\par} 
+    \vspace{1cm}
+    % Supervisor Name(s)
+    {\Large Supervised by A.Baker and C.Donald\par} 
+    \vfill
+    % Faculty
+    {Department of Electrical and Computer Systems Engineering\\
+    University of Auckland} 
+\end{titlepage}
+
+% Table of contents page
+\tableofcontents
+\newpage
+
+% Report body
+
+\section{Background}
+Background here
+
+\section{Objective}
+Objective here
+
+\section{Scope}
+Scope here
+
+\section{Methodology and Approach}
+Methodology and Approach here
+
+\section{Facilities}
+Facilities here
+
+\section{Budget}
+Budget here
+
+\section{Deliverables and Program Schedule}
+Deliverables and Program Schedule here
+
+% References section
+\newpage
+% References here
+\bibliographystyle{plain}
+\bibliography{citations.bib}
+
+\end{document}
