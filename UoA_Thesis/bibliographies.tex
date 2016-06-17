@@ -1,0 +1,168 @@
+%
+% Demonstration text and user guide for aucklandthesis.cls
+% by Alistair Kwan, February 2016
+%
+
+\chapter{Bibliographies with BibLaTeX}
+
+Compiling a bibliography in LaTeX requires some investment, just as it would if you wrote your thesis using other tools. The demonstration here shows how to use a supplementary application called \emph{BibLaTeX}.  BibLaTeX offers considerable flexibility in automating the citation style, but here you will see only a beginning: BibLaTeX does much more than this.  For example, BibLaTeX allows  historians to separate published primary, unpublished primary, and secondary sources into three separate listings.
+
+If your thesis involves only a short list of citations, and you don't need to cite very heavily (e.g. in a thesis that predominantly analyses your data), you could use the simpler features of BibTeX. 
+
+For further details about LaTeX's internal bibliography system, BibTeX and BibLaTeX, see \url{https://en.wikibooks.org/wiki/LaTeX/Bibliography_Management}
+
+
+% =================================================
+\section{Infrastructure}
+% =================================================
+
+BibLaTeX needs a few things in your master document. 
+
+\subsection{Preamble}
+
+In the preamble, add this:
+
+\begin{enumerate}
+\item \verb+\usepackage[+
+
+	\quad\quad \verb+style=authoryear,+ 
+
+	\quad\quad \verb+citestyle=authortitle,+
+	
+	\quad\quad \verb+backend=biber+
+
+	\quad \verb+]{biblatex}+
+
+\item \verb+\addbibresource{kwan-bibliography}+
+\end{enumerate}
+
+The first command loads the BibLaTeX package. It sets the bibliography style and the citation style. The styles here set the bibliography to be sorted by author, then year, and citations by author and title (see section \ref{sec:citationstyle} below.) The `back end', i.e. the engine that does database handling, is set to Biber, which handles multilingual work much better than BibTeX can. You probably don't need to know much more about Biber than that.
+
+The second command nominates your bibliography file (ending in \emph{.bib}). You can name multiple files here. This particular file is one of several that went into Alistair Kwan's doctoral dissertation. It contains a mixture of entries so you can see what a realistic \emph{.bib} file might look like.
+
+\subsection{Endmatter}
+
+At the very end of your master file, where you want the bibliography to appear, add this:
+
+\begin{itemize}
+\item \verb+\printbibliography+
+\end{itemize}
+
+
+% ============================================
+\section{Citing other people's work}
+% =================================================
+
+The main citation command is \verb+\cite{}+. It comes in a few variants:
+
+\subsection{Citing a work, a chapter or a page range}
+\newlength{\tablecolwidth}
+\setlength{\tablecolwidth}{0.5\columnwidth}
+\addtolength{\tablecolwidth}{-2\tabcolsep}
+\begin{tabular}{p{\tablecolwidth}p{\tablecolwidth}}
+\toprule
+Citing like this... & Does this: \\
+\midrule
+\verb+\cite{Bringhurst1999}+ 
+	& \cite{Bringhurst1999} \\
+\verb+\cite[12, 14--16]{Schmutz2006}+
+	& \cite[12, 14--16]{Schmutz2006} \\
+\verb+\cite[chap. 3]{Lassels1698}+
+	& \cite[chap. 3]{Lassels1698} \\
+\verb+\cite[sec.~6]{Wren1669}+ 
+	& \cite[sec.~6]{Wren1669} \\
+\verb+\cite{+\texttt{Bringhurst1999, Nielsen1968, Chambers1728}\verb+}+ 
+	& \cite{Bringhurst1999, Nielsen1968, Chambers1728} \\
+\verb+\parencite[72]{Bringhurst1999}+
+	& \parencite[72]{Bringhurst1999} \\
+\verb+\Textcite[72]{Bringhurst1999}+ 
+	& \Textcite[72]{Bringhurst1999} \\
+\bottomrule
+\end{tabular}
+
+
+\subsection{Citing with style}
+\label{sec:citationstyle}
+
+BibLaTeX comes with a lot of in-built styles including the famously difficult style of the Chicago University Press. There are more that you can download, and you can make your own.
+
+Why so many styles?  In some disciplines, you discuss other researchers' work by referring to the researchers by name, and their work by date.  In-line citations by name and year serve well in a he-said, she-said discourse.  This is especially helpful when you are referring to very recent work in a fast-paced disciplinary conversation, playing authors off against each other or setting their work up for your coming coup de gr\^ace.
+
+When publication years don't matter so much, e.g. in disciplines in which timeless ideas stick around for a years, decades or centuries of reflection and critique, the author's name often matters but citing the year is silly.  You might also feel a need to cite titles. That makes in-line citation very unwieldy, so often a shortened title is used, and the citation goes into footnotes or endnotes rather than in the body text.
+
+Citing in notes also gives plenty of space in which to summarise your position on a work. Perhaps you want to mention it because the title claims that it tackles your topic, for example, and excuse yourself from attending to it any further because its message, presuming that has one, has proven too rarefied to grasp.
+
+Footnotes or endnotes? Footnotes are usually easier for the reader to consult because they're right there on the same page when you need them.  LaTeX does a very good job of arranging them.  But if you are writing in a way that doesn't need citations to be so immediately present, endnotes allow you to get them completely out of the way.
+
+There are three main reasons for choosing your style: what you want your citations to do, what your readers are familiar with, and because your supervisor told you so.
+
+Table \ref{tab:biblatex-styles} shows some of the in-built style options.
+
+\begin{table}[htp]
+\caption{BibLaTeX styles.}
+\label{tab:biblatex-styles}
+\centering
+\begin{tabular}{lp{10cm}}
+\toprule
+\texttt{numeric} & Numbers the entries. \\
+\texttt{alphabetic} & Creates an alphanumeric reference for each entry. \\
+\texttt{authoryear} 
+	& Author and year. \\
+\texttt{authoryear-ibid}
+	& Author and year, and the erudite \emph{ibidem}. \\
+\texttt{authortitle}
+	& Author and title. \\
+\texttt{verbose} 
+	& A full citation at first, and a short form afterwards. \\
+\texttt{chem-acs}
+	& American Chemical Society. \\
+\texttt{nature}
+	& \emph{Nature}.\\	
+\texttt{science}
+	& \emph{Science}.\\	
+\texttt{phys}
+	& American Institute of Physics\\	
+\texttt{chicago-authordate}
+	& Chicago. \\	
+\texttt{ieee}
+	& Institute of Electrical and Electronics Engineers.\\	
+\texttt{mla}
+	& Modern Languages Association. Now we're talking.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Listing works not cited}
+Sometimes you want a work to appear in the bibliography even though it hasn't been cited.  The command for this is \verb+\nocite{}+.
+
+This document includes the command, 
+
+\quad\quad \verb+\nocite{Imhof1996, Zeiller1655, Delambre1806}+ 
+
+\noindent to get those three works in from the bibliography file, in addition to those cited above.  Jump ahead to the end to see whether it worked.
+
+If you want every listed work included, say \verb+\nocite{*}+.  
+
+\nocite{Imhof1996, Zeiller1655, Delambre1806}
+
+% =================================================
+\section{Where do the references go? The \emph.{bib} file}
+% =================================================
+
+All of your citations are detailed in a separate \emph{.bib} file. You can get the entries from Google Scholar, Zotero or Refworks.  You can also enter them manually by yourself.
+
+The \emph{.bib} file used for this demonstration is called \texttt{kwan-bibliography.bib}. It's part of Alistair Kwan's dissertation, and contains a mixture of journal articles and books so you can see how bibliographic entries work.
+
+
+
+
+% =================================================
+\section{Compiling}
+% =================================================
+Compiling with a bibliography requires four steps.
+\begin{enumerate}
+\item Compile with LaTeX.
+\item Run Biber to get the citation entries from the \emph{.bib} file.\footnote{Running Biber may require an adjustment to your editor configuration. Some editors are set up to run BibTeX, but BibLaTeX works better with Biber, especially if you are working in multiple languages.  If the compiler complains that it cannot find any citation entries, it is often because you are running BibTeX rather than Biber.}
+\item Compile with LaTeX again to form the citations.
+\item Compile with LaTeX a third time to finalise the citation references.
+\end{enumerate}

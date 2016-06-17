@@ -1,0 +1,179 @@
+\chapter{Writing your thesis in LaTeX}
+%
+% Demonstration text and user guide for aucklandthesis.cls
+% by Alistair Kwan, February 2016
+%
+% ===================================================
+\section{Common commands}
+% ===================================================
+\begin{description}
+\item {\verb+\chapter{}+} marks a new chapter. LaTeX handles the numbering automatically, as it also does for \verb+\section{}+, \verb+\subsection{}+, \verb+\subsubsection{}+. For University of Auckland theses, avoid dividing any further than sub-subsections.
+\item {\verb+\chapter*{}+}, with an asterisk, produces an \emph{un-numbered} heading at the same level as the chapter. It does not appear in the table of contents. You can  similarly add an asterisk to the section, subsection and sub-subsection commands.
+\item {\verb+\emph{}+} is the usual command for emphasing text by \emph{italicisation}. There is another way, but this way is better.
+\item {\verb+\textbf{}+} makes \textbf{boldface text}.
+\item {\verb+\footnote{}+} inserts footnotes. These are automatically numbered.
+\item {\verb+-+} inserts a hyphen: - 
+\item {\verb+--+} inserts an en dash: --
+\item {\verb+---+} inserts an em dash: ---
+\end{description}
+
+That is probably enough to get you started. If you read the source code for this chapter, you'll find examples of other commands as well.
+
+% ===================================================
+\section{Inserting figures and tables}
+% ===================================================
+\label{sec:figuresandtables}
+Figures and tables are inserted using the \verb+figure+ and \verb+table+ \emph{environments}. These differ from the formatting commands listed above: the special thing about figures and tables is that they float around, so the LaTeX compiler finds the best place for them. 
+
+\begin{figure}[tp]
+\begin{verbatim}
+     \begin{figure}[tp]
+          \includegraphics[width=5cm]{horse}
+          \caption[A horse.]{A picture of a horse, and a 
+          scholarly observation about how the tail seems 
+          always to be at the end opposite the head.}
+          \label{fig:horsepicture}
+     \end{figure}
+\end{verbatim}\caption{The figure environment.}
+\label{fig:figure}
+\end{figure}
+
+An example of the figure environment is shown in figure \ref{fig:figure}. Line by line, it works like this:
+\begin{description}
+	\item{\verb+\begin{figure}[tp]+} opens the environment for this figure. The \verb+t+ in \verb+[tp]+ says to put the figure at the top of a page if possible. If not possible, the \verb+[p]+ says put it on a page of its own.
+	\item{\verb+\includegraphics[width=5cm]{horse}+} brings in a picture from a separate file. It's probably called horse.png or horse.jpg (the LaTeX compiler will work it out). It will appear 5cm wide. You could alternatively set the picture's height. Or you could set both, which can be handy if you want to adjust its aspect ratio.
+	\item {The \verb+\caption+ command} has two parts. The bit in curly braces gets printed under the figure. This is too long for the table of figures, so the optional part in square brackets specifies what to use there. 
+	\item {\verb+\label{fig:horsepicture}+} gives you an anchor for cross-references. Wherever you need the figure number in the document, use \verb+\ref{fig:horsepicture}+. The numbering automatically updates as needed. Many of us start figure labels with \texttt{fig:} to help us mentally keep track of the labels — and also \texttt{tab:}, \texttt{eq:}, \texttt{ch:}, \texttt{sec:} for labelling tables, equations, chapters, sections.  You, however, can call them whatever you like. The LaTeX compiler doesn't care very much.
+	
+	This is section \ref{sec:figuresandtables}, referred to as \verb+\ref{sec:figuresandtables}+.
+	
+	\texttt{label} commands come immediately after whatever \emph{numbered} thing it is that they're labelling. In a figure or table, that's the caption — not the picture or the table.
+	\item{\verb+\end{figure}+} completes the figure environment.
+\end{description}
+
+Notice that the figure caption comes below the picture. If this were a table, the caption would go at the top, as the first command inside the table environment. So table environment looks like the example in figure \ref{fig:table}. The table environment does not produce the table; it only ensures that the caption gets a table numbering and that the contents entry goes to the list of tables. The table itself is constructed using a \textbf{tabular} environment.
+
+\begin{figure}[tp]
+\protect\begin{verbatim}
+     \begin{table}[tp]
+          \caption{Food for the horse.}
+          \label{tab:horsefoods}
+          \begin{center}
+             \begin{tabular}{llc}
+             \toprule
+             Food & Colour & Quantity \\
+             \midrule
+             grass & green & 7 kg \\
+             sugar & white & 2 cubes \\
+             carrot & orange & 14 \\
+             \bottomrule
+             \end{tabular}
+          \end{center}
+     \end{table}
+\end{verbatim}
+\caption{The table environment, with a tabular environment inside.}
+\label{fig:table}
+\end{figure}
+
+% ===================================================
+\section{Equations}
+% ===================================================
+
+LaTeX has a whole sub-language for describing mathematical notation. This code:
+
+\begin{verbatim}
+\begin{equation}
+     -\frac{\hbar^2}{2m} \frac{\partial \psi}{\partial x} + V \psi 
+       = i \hbar \frac{\partial \psi}{\partial t}
+     \label{eq:schrodinger}
+\end{equation}
+\end{verbatim}
+produces this:
+
+\begin{equation}
+	-\frac{\hbar^2}{2m} \frac{\partial \psi}{\partial x} + V \psi = i \hbar \frac{\partial \psi}{\partial t}
+	\label{eq:schrodinger}
+\end{equation}
+
+The equation numbers at the right margin are automatic.
+
+Function names are given by commands, so that readers perceive them as functions rather than as a run of variables, viz. $cos x$ and $sin a$ vs $\cos x$ and $\sin a$.
+
+\begin{equation}
+	\int^a_b \cos x\; dx = \sin a - \sin b + c
+\end{equation}
+
+Notice also that there's a big space between $\cos x$ and the $dx$ making the integral easier to read at a glance than $\int\cos x dx$. You specify that space using the command, \verb|\;|. You can also make narrower spaces with \verb|\,| or \verb|\.| and a wider space with \verb|\:|.
+
+If you need mathematical notation within your paragraphs instead of as stand-alone paragraphs, use dollar signs to invoke `math mode' like this:  \verb|$F = m \times a$|.
+
+The dollar sign always does that in LaTeX. If you need to write about all your \$\$\$, put a backslash before: \verb|\$|.
+
+
+% ===================================================
+\section{Verse and quotations}
+% ===================================================
+
+LaTeX provides \texttt{verse}, \texttt{quote} and \texttt{quotation} environments. All three of these indent at both the left and the right.
+
+\begin{verbatim}
+\begin{verse}
+L'autre jour, au fond d'un vallon \\
+un serpent piqua Jean Fréron.
+
+Que pensez-vous qu'il arriva? \\
+Ce fut il serpent qui creva. \\
+
+\hfill --- Voltaire.
+\end{verse}
+\end{verbatim}
+
+The double slash marks the end of a line, just as it does in the \texttt{tabular} environment. A blank line separates the stanzas.
+
+The \verb+\hfill+ command fills out the line horizontally, pushing the poet's name to the far right.  The result is as follows:
+
+\begin{verse}
+L'autre jour, au fond d'un vallon \\
+un serpent piqua Jean Fréron.
+
+Que pensez-vous qu'il arriva? \\
+Ce fut il serpent qui creva. \\
+
+\hfill --- Voltaire.
+\end{verse}
+
+Try the \texttt{quote} and \texttt{quotation} environments yourself.
+
+% ===================================================
+\section{Custom characters}
+% ===================================================
+Occasionally scholarship requires special characters, such as symbols for units of currency or weight, or astrological or alchemical signs. Many of these are provided by LaTeX packages (look on-line for the \emph{LaTeX Symbol List}). Most present-day mathematical symbols are built-in.
+
+
+% ===================================================
+\section{Typographic trivia}
+% ===================================================
+\subsection{Standard conventions}
+`Serious' books follow most or all of the following conventions:
+\begin{itemize}
+\item Odd pages are always on the right, even pages on the left.
+\item Chapters and the table of contents always start on odd pages.
+\item When the first lines of paragraphs are indented, an exception is made for the first paragraph after each heading.
+\item When paragraphs are marked by indenting a line, they are not spaced out. (LaTeX often breaks this rule.)
+\item No underlining.
+\item Tables have only horizontal rules, not vertical rules.
+\item Captions are above tables, and below figures.
+\end{itemize}
+
+\subsection{Why are books paginated in roman numerals, then in arabic numerals?}
+In the old days of printing by hand, you could not write the table of contents until you knew which pages everything would be on. That had to wait until the text was typeset by arranging little metal letters, page by page. So this — the mainmatter — was done first. Afterwards, the frontmatter was typeset — a title page, the table of contents, and prefaces and dedications. The prefaces and dedications were also often left until the end in case political and financial imperatives necessitated a last-minute change. All of this required that the frontmatter by paginated separately. The French went a step further, putting the table of contents at the end, often on the back cover.
+
+The endmatter often has its own page numbering as well. Often the endmatter is done completely separately, for example as an advertising supplement.
+
+Now that computers re-typeset and adjust the page numbers on the fly, it is no longer necessary to paginate the three parts separately. But many printers still do, because many readers still subconsciously anticipate the long-established norms.
+
+\subsection{Why two title pages?}
+Books usually have both a full title page and a short title page. The full page used to be what customers saw when browsing a book stall, back when books were sold without covers. Old title pages usually have a lot of content because they serve the same advertising pitch as today's dust jackets. The short title page is believed to date from back when books were stored flat on the shelf, with their spines facing the wall. The short title page was there to be torn out and folded over the fore-edge, providing a way to tell which book was which.
+
+\subsection{Readability}
+Typography might look like it's about creativity and personal expression but, even more, it's about readability. One of the primary criteria in book typography is that, if your readers are paying attention to your ingenious font choice, they're not paying attention to your thesis. So, as you develop your LaTeX skills, be discreet. Use typography to help get your content across.
