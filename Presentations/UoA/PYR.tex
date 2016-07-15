@@ -1,0 +1,105 @@
+\documentclass[compress,t]{beamer}
+
+\usepackage[LGR,T1]{fontenc}
+
+
+\usetheme{Madrid}
+\setbeamercovered{transparent}
+
+\definecolor{uoa-blue}{RGB}{3,80,133}
+\definecolor{uoa-light-blue}{RGB}{0,154,199}
+\definecolor{uoa-grey}{RGB}{230,232,231}
+
+\setbeamercolor{structure}{fg=uoa-blue}
+
+\setbeamertemplate{blocks}[default]
+\setbeamercolor{block title}{bg=uoa-blue,fg=white}
+\setbeamercolor{block body}{bg=uoa-grey,fg=black}
+
+\setbeamertemplate{title page}[default]
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+
+\setbeamertemplate{itemize items}[default]
+\setbeamertemplate{enumerate items}[default]
+
+\setbeamertemplate{section in toc}[default]
+\setbeamertemplate{subsection in toc}[default]
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\setromanfont{Verdana}
+
+\definecolor{graphFirst}{RGB}{2,136,209}
+\definecolor{graphSecond}{RGB}{211,47,47}
+\definecolor{graphThird}{RGB}{245,124,0}
+\definecolor{graphFourth}{RGB}{56,142,60}
+\definecolor{graphFifth}{RGB}{81,45,168}
+\definecolor{graphSixth}{RGB}{69,90,100}
+\definecolor{graphSeventh}{RGB}{251,192,45}
+
+\newenvironment{myitemize}
+{ \begin{itemize}
+		\setlength{\itemsep}{10pt}     }
+	{ \end{itemize}                  } 
+
+
+\newenvironment<>{varblock}[2][\textwidth]{%
+  \setlength{\textwidth}{#1}
+  \begin{actionenv}#3%
+    \def\insertblocktitle{#2}%
+    \par%
+    \usebeamertemplate{block begin}}
+  {\par%
+    \usebeamertemplate{block end}%
+  \end{actionenv}}
+  
+\AtBeginSection[]
+{
+	\begin{frame}<beamer>
+		\frametitle{Overview}
+		\tableofcontents[currentsection]
+	\end{frame}
+}
+
+\title[Short]{Title}
+
+\subtitle{Subtitle}
+
+\author[]{\large Author}
+
+\institute[University of Auckland]
+{
+	\includegraphics[scale=0.3]{UOA-HC-RGB.png}
+}
+
+\date[]{
+	Date
+}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{\titlepage}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+\begin{frame} \frametitle{Slide Title}
+	\begin{block}{Block Title}
+		\begin{myitemize}
+			\item Custom bullet points
+			\item Match the theme
+		\end{myitemize}
+	\end{block}
+	
+	\vspace{10pt}
+	
+	\begin{block}{}
+		Blocks don't need to have titles.
+	\end{block}
+\end{frame}
+
+\end{document}
