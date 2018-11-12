@@ -1,0 +1,134 @@
+\documentclass[table]{beamer}
+
+\usepackage[orientation=portrait,size=a0,scale=1.4,debug]{beamerposter}
+\mode<presentation> {
+	\usetheme[]{UOA}
+}
+
+\input{preamble.tex}
+
+\title{\Huge Title}
+
+\author[]{\large Author 1$^{1}$}
+
+\institute[]
+{
+	$^{1}$ Department of Electrical \& Computer Engineering, The University of Auckland
+}
+
+\posterlogo{
+	\centering
+	\includegraphics[width=\textwidth]{fig/uoa.png}
+}
+
+\date{
+	Date
+}
+
+
+\newlength{\columnheight}
+\setlength{\columnheight}{104cm}
+
+\begin{document}
+	\begin{frame}{}
+		
+		\vspace{1cm}
+		
+		\begin{columns}[t]
+			\begin{column}{0.02\paperwidth}
+			\end{column}
+			
+			\begin{column}{0.46\paperwidth}
+				\parbox[t][\columnheight]{\textwidth}{
+				
+					\begin{block}{Block Title}
+						\setlength{\rightskip}{0pt plus 200pt}
+						
+						Content inside a Block.
+					\end{block}
+				
+					\vspace{1cm}
+					
+					\begin{block}{Overview}
+						\setlength{\rightskip}{0pt plus 200pt}
+						
+						More content inside a block.
+						
+						\begin{itemize}
+							\item And we can have some bullet points!
+						\end{itemize}
+					\end{block}
+				
+					\vspace{1cm}
+					
+					\begin{block}{Top Level Block}
+						\setlength{\rightskip}{0pt plus 200pt}
+						
+						Sometimes we might want to...
+						
+						\vspace{1cm}
+						
+						\begin{columns}[c]
+							\begin{column}{0.95\textwidth}
+								\begin{block}{Nested Block}
+									\setlength{\rightskip}{0pt plus 200pt}
+									
+									Nest some blocks!
+								\end{block}
+							\end{column}
+						\end{columns}
+					\end{block}
+				}
+			\end{column}
+			
+			\begin{column}{0.04\paperwidth}
+			\end{column}
+			
+			\begin{column}{0.46\paperwidth}
+				\parbox[t][\columnheight]{\textwidth}{
+					
+					\begin{block}{Using VFill}
+						\setlength{\rightskip}{0pt plus 200pt}
+						Blocks can be separated by a vfill so that they're equally spaced.
+					\end{block}
+					
+					\vfill
+										
+					\parbox{\textwidth}{
+						\centering
+						\taburowcolors[2] 2{tableLineOne .. tableLineTwo}
+						\tabulinesep = 2mm
+						
+						\begin{tabu} to \textwidth {X[-1,c,m] X[-1,c,m] X[-1,c,m] X[-1,c,m] X[-1,c,m] X[-1,c,m]}
+							\tableHeaderStyle
+							& & \multicolumn{2}{c}{System A} & \multicolumn{2}{c}{System B} \\
+							\tableHeaderStyle
+							\multirow{-2}{*}{Benchmark} & \multirow{-2}{*}{Benchmark LoC} & Time (ms) & Increase & Time (ms) & Increase \\
+							%
+							Baseline  & --- & $5239.1$ & & $495.8$ & \\
+							P1  & $24$ & $5274.3$ & $0.67$\,\% & $528.5$ & $6.59$\,\% \\
+							P2  & $32$ & $5294.3$ & $1.05$\,\% & $544.3$ & $9.79$\,\% \\
+							P3  & $32$ & $5303.3$ & $1.23$\,\% & $546.1$ & $10.14$\,\% \\
+							P4  & $28$ & $5306.7$ & $1.29$\,\% & $532.6$ & $7.43$\,\% \\
+							P5  & $28$ & $5313.3$ & $1.42$\,\% & $545.2$ & $9.96$\,\% \\
+							P2 $\wedge$ P3  & $96$ & $5480.7$ & $4.61$\,\% & $619.83$ & $25.02$\,\% \\
+						\end{tabu}
+					}
+					
+					\vfill
+					
+					\begin{block}{References}
+						\footnotesize
+						\bibliographystyle{ieeetr}
+						\bibliography{biblio} 
+					\end{block}
+				
+				}
+			\end{column}
+			
+			\begin{column}{0.02\paperwidth}
+			\end{column}
+			
+		\end{columns}
+	\end{frame}
+\end{document}
