@@ -1,0 +1,197 @@
+% this style was created by Nathan Allen and is basted on the University of Auckland Style Guide
+\ProvidesPackage{beamerthemeUOA}
+
+\newif\if@doGrid
+\@doGridfalse
+\DeclareOption{grid}{\@doGridtrue}
+\ProcessOptions
+
+% \usepackage{graphics}
+\usepackage{graphicx}
+\newcommand{\vcenteredinclude}[1]{\begingroup
+\setbox0=\hbox{\includegraphics[width=.8\textwidth, height=.06\paperheight, keepaspectratio]{#1}}%
+\parbox{\wd0}{\box0}\endgroup}
+
+\def\website#1{\gdef\@website{#1}}
+\def\email#1{\gdef\@email{#1}}
+\def\posterlogo#1{\gdef\@posterlogo{#1}}
+\gdef\@website{{}}
+\gdef\@email{{}}
+\gdef\@posterlogo{{}}
+
+
+\usepackage[scale=0.8,sfdefault,light]{roboto} 
+
+\usepackage{calc}
+\newlength{\mylength}
+
+\mode<presentation>
+
+\definecolor{uoa-blue}{RGB}{3,80,133}
+\definecolor{uoa-light-blue}{RGB}{0,154,199}
+\definecolor{uoa-grey}{RGB}{230,232,231}
+
+\definecolor{graphFirst}{RGB}{2,136,209} % Light Blue 700
+\definecolor{graphSecond}{RGB}{211,47,47} % Red 700
+\definecolor{graphThird}{RGB}{245,124,0} % Orange 700
+\definecolor{graphFourth}{RGB}{56,142,60} % Green 700
+\definecolor{graphFifth}{RGB}{81,45,168} % Deep Purple 700
+\definecolor{graphSixth}{RGB}{69,90,100} % Blue Grey 700
+\definecolor{graphSeventh}{RGB}{251,192,45} % Yellow 700
+
+\definecolor{backgroundFirst}{RGB}{129,212,250} % Light Blue 200
+\definecolor{backgroundSecond}{RGB}{239,154,154} % Red 200
+\definecolor{backgroundThird}{RGB}{255,204,128} % Orange 200
+\definecolor{backgroundFourth}{RGB}{165,214,167} % Green 200
+\definecolor{backgroundFifth}{RGB}{179,157,219} % Deep Purple 200
+\definecolor{backgroundSixth}{RGB}{176,190,197} % Blue Grey 200
+\definecolor{backgroundSeventh}{RGB}{255,245,157} % Yellow 200
+
+\colorlet{tableHeader}{uoa-blue}
+\definecolor{tableLineOne}{RGB}{245, 245, 245}
+\definecolor{tableLineTwo}{RGB}{224, 224, 224}
+
+\newcommand{\tableHeaderStyle}{
+	\rowfont{\leavevmode\color{white}\bfseries}
+	\rowcolor{tableHeader}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%It seems many of the following entries do not control any visible Behaviour. All such entries are
+%set to red, so that they are easy to spot if they ever become visible
+
+\setbeamercolor{headline}{fg=red,bg=uoa-blue}
+\setbeamercolor{footline}{fg=red, bg=red}
+\setbeamerfont{footline}{size=\large,series=\bf}
+\setbeamercolor{separation line}{bg=uoa-blue}
+\setbeamercolor{title in headline}{fg=white}
+\setbeamercolor{author in headline}{fg=white}
+\setbeamercolor{institute in headline}{fg=white}
+
+\setbeamercolor{framesubtitle}{fg=red, bg=white}
+\setbeamercolor{author in head/foot}{fg=white, bg=uoa-blue}
+\setbeamercolor{title in head/foot}{fg=red, bg=red}
+
+\setbeamercolor*{normal text}{fg=black, bg=white}
+\setbeamercolor*{block title}{fg=white,bg=uoa-blue}
+\setbeamercolor*{block body}{fg=black,bg=uoa-grey}
+\setbeamerfont{block title}{size=\large,series=\bfseries}
+\setbeamercolor{upper separation line head}{fg=red}
+
+\setbeamercolor*{example body}{fg=red,bg=red}
+\setbeamercolor*{example text}{fg=red,bg=red}
+\setbeamercolor*{example title}{bg=red,fg=red}
+
+\setbeamercolor{alerted text}{fg=red}
+\setbeamercolor{structure}{fg=uoa-blue}
+
+\setbeamertemplate{itemize items}{\color{uoa-blue}$\blacktriangleright$}
+\setbeamertemplate{navigation symbols}{}  % no navigation on a poster
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% redefinition of 'block'
+\newsavebox{\squaredblocktext}
+\setbeamertemplate{block begin}{
+	\par\vskip\medskipamount%
+	\makebox[\dimexpr\textwidth-1.5ex\relax][l]{%
+		\begin{beamercolorbox}[colsep*=.75ex]{block title}
+			\usebeamerfont*{block title}\insertblocktitle%
+		\end{beamercolorbox}}%
+		\begin{lrbox}{\squaredblocktext}%
+			\begin{minipage}[t]{\textwidth}%
+				\ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+			
+\setbeamertemplate{block end}{
+		\end{minipage}%
+	\end{lrbox}%
+	{\parskip0pt\par}%
+	\ifbeamercolorempty[bg]{block title}{}
+	{\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+	\usebeamerfont{block body}%
+	\makebox[\dimexpr\textwidth-1.5ex\relax][l]{%
+		\begin{beamercolorbox}[colsep*=.75ex,vmode]{block body}%
+			\usebox{\squaredblocktext}
+		\end{beamercolorbox}%
+	}\vskip\smallskipamount%
+}
+% end redefinition of 'block'
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{headline}{
+	\leavevmode
+	\begin{beamercolorbox}[wd=\paperwidth]{headline}
+		\vspace{2ex}\\
+		\begin{columns}[c]
+			\begin{column}{.03\paperwidth}
+			\end{column}
+			\begin{column}{.71\paperwidth}
+				\raggedleft
+				\usebeamercolor{title in headline}{\color{fg}\textbf{\LARGE{\inserttitle}}\\[1ex]}
+				\usebeamercolor{author in headline}{\color{fg}\large{\insertauthor}\\[1ex]}
+				\usebeamercolor{institute in headline}{\color{fg}\small{\insertinstitute}\\[1ex]}
+			\end{column}
+			\begin{column}{.03\paperwidth}
+			\end{column}
+			\begin{column}{.2\paperwidth}
+				\begin{center}
+					\@posterlogo
+				\end{center}
+			\end{column}
+			\begin{column}{.03\paperwidth}
+			\end{column}
+		\end{columns}
+		\vspace{2ex}\\
+	\end{beamercolorbox}
+
+ 	\begin{beamercolorbox}[wd=\paperwidth]{lower separation line head}
+		\rule{0pt}{2pt}
+	\end{beamercolorbox}
+	\vskip-2cm
+	}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{footline}{
+	\begin{beamercolorbox}[wd=\paperwidth]{upper separation line foot}
+		\rule{0pt}{2pt}
+	\end{beamercolorbox}
+	\leavevmode%
+	\begin{beamercolorbox}[ht=4ex,wd=\paperwidth]{author in head/foot}%
+		\begin{columns}[c]
+			\begin{column}{.05\paperwidth}
+			\end{column}
+			\begin{column}{.3\paperwidth}
+				\centering
+				\@website
+			\end{column}
+			\begin{column}{.3\paperwidth}
+				\centering
+				\insertdate
+			\end{column}
+			\begin{column}{.3\paperwidth}
+				\centering
+				\@email
+			\end{column}
+			\begin{column}{.05\paperwidth}
+			\end{column}
+		\end{columns}
+		\vskip1ex
+	\end{beamercolorbox}
+	\vskip0pt%
+	\begin{beamercolorbox}[wd=\paperwidth]{lower separation line foot}
+		\rule{0pt}{2pt}
+	\end{beamercolorbox}
+	}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Display a grid to help align images ... and it looks nice with this color scheme
+\if@doGrid
+	\beamertemplategridbackground[1cm]
+\fi
+
+%Some beamer customizations:
+\setbeamertemplate{bibliography item}[text]
+\setbeamertemplate{caption}[numbered]{}% Number float-like environments
+
+\mode<all>
